@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Combat/Characters/Monster1.gd" type="Script" id=1]
+[ext_resource path="res://Assets/characters.png" type="Texture" id=2]
+[ext_resource path="res://Combat/Battler/BattlerSkin/BattlerReference.gd" type="Script" id=3]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 16, 0, 16, 16 )
+
+[node name="Monster1" type="Position2D"]
+script = ExtResource( 1 )
+
+[node name="BattlerReference" type="Sprite" parent="."]
+scale = Vector2( 4, 4 )
+skew = 4.37114e-08
+texture = SubResource( 1 )
+script = ExtResource( 3 )
+
+[node name="Tween" type="Tween" parent="BattlerReference"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BattlerReference"]
+
+[node name="Queue" type="ColorRect" parent="."]
+visible = false
+margin_left = -6.54006
+margin_top = 39.9561
+margin_right = 7.45994
+margin_bottom = 52.9561
+__meta__ = {
+"_edit_use_anchors_": false
+}
