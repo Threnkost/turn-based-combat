@@ -1,5 +1,6 @@
 extends Battler
 
+#Player's characters.
 class_name Ally
 
 func playTurn(turnQueue) -> void:
