@@ -2,21 +2,21 @@ extends Battler
 
 class_name Enemy
 
+#To manage enemy's AI.
 onready var AI : EnemyAI
 
+#Initializes enemy AI
+func _ready():
+	AI = EnemyAI.new().initialize()
+
 func playTurn(turnQueue) -> void:
+	#Waits a little to attack player.
 	yield(get_tree().create_timer(0.35), "timeout")
 
-	.playTurn(turnQueue)
-	turnQueue.label.text = "Ally"
+	#Executes "Attack" action. [Actions/Attack]
+	var attackAction = battlerReference.getAction("Attack")
+	attackAction.execute([self, AI.getRandomTarget(turnQueue.battleground.allies)])
+	yield(attackAction, "action_completed")
 	
-	battlerReference.attackToEntity(turnQueue.battleground.allies[0])
-	yield(battlerReference.tween, "tween_completed")
-	
-	yield(get_tree().create_timer(1), "timeout")
-	#yield(animationPlayer, "animation_finished")
-	
-	battlerReference.returnToStart()
-	yield(battlerReference.tween, "tween_completed")
-	
+	#Skips this turn.
 	turnQueue.skipTurn()

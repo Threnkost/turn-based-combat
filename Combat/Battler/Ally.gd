@@ -3,16 +3,12 @@ extends Battler
 class_name Ally
 
 func playTurn(turnQueue) -> void:
-	.playTurn(turnQueue)
-	turnQueue.label.text = "Ally"
+	#turnQueue.label.text = "Ally"
+
+	#Executes "Attack" action.
+	var attackAction = battlerReference.getAction("Attack")
+	attackAction.execute([self, turnQueue.battleground.enemies[0]])
+	yield(attackAction, "action_completed")
 	
-	battlerReference.attackToEntity(turnQueue.battleground.enemies[0])
-	yield(battlerReference.tween, "tween_completed")
-	
-	yield(get_tree().create_timer(1), "timeout")
-	#yield(animationPlayer, "animation_finished")
-	
-	battlerReference.returnToStart()
-	yield(battlerReference.tween, "tween_completed")
-	
+	#Skips this turn.
 	turnQueue.skipTurn()

@@ -32,5 +32,17 @@ script = ExtResource( 1 )
 [node name="Character1" parent="TurnQueue" instance=ExtResource( 2 )]
 position = Vector2( 281.58, 288.8 )
 
+[node name="Character2" parent="TurnQueue" instance=ExtResource( 2 )]
+position = Vector2( 280.58, 394.8 )
+
+[node name="Character3" parent="TurnQueue" instance=ExtResource( 2 )]
+position = Vector2( 279.58, 502.8 )
+
 [node name="Monster1" parent="TurnQueue" instance=ExtResource( 3 )]
 position = Vector2( 784.937, 291.792 )
+
+[node name="Monster2" parent="TurnQueue" instance=ExtResource( 3 )]
+position = Vector2( 787.937, 399.792 )
+
+[node name="Monster3" parent="TurnQueue" instance=ExtResource( 3 )]
+position = Vector2( 786.937, 513.792 )
