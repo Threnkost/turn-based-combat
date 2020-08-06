@@ -10,5 +10,3 @@ func _ready():
 			enemies.append(battler)
 		elif battler is Ally:
 			allies.append(battler)
-#	print("Enemies : ", enemies)
-#	print("Allies : ", allies)
