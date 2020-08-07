@@ -13,6 +13,10 @@ func initialize() -> EnemyAI:
 
 #Enemy will use this function to find his target. (Ally -> Their enemy.)
 func getRandomTarget(targets : Array) -> Battler:
-	var targetCount = targets.size()
-	var target : Battler = targets[rng.randi_range(0, targetCount - 1)]
-	return target
+	var aliveTargets = []
+	for i in targets:
+		if i.isAlive:
+			aliveTargets.append(i)
+	var targetCount = aliveTargets.size()
+	var target : Battler = aliveTargets[rng.randi_range(0, targetCount - 1)]
+	return aliveTargets[0]#target

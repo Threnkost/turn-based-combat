@@ -44,6 +44,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Combat/Actions/IAction.gd"
 }, {
+"base": "Node",
+"class": "Stat",
+"language": "GDScript",
+"path": "res://Stats/Stat.gd"
+}, {
 "base": "YSort",
 "class": "TurnQueue",
 "language": "GDScript",
@@ -57,13 +62,14 @@ _global_script_class_icons={
 "Enemy": "",
 "EnemyAI": "",
 "IAction": "",
+"Stat": "",
 "TurnQueue": ""
 }
 
 [application]
 
 config/name="Turnbased"
-run/main_scene="res://Game.tscn"
+run/main_scene="res://MainScene/Game.tscn"
 config/icon="res://icon.png"
 
 [display]

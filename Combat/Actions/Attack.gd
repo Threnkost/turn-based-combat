@@ -13,6 +13,7 @@ func execute(args := []) -> void:
 	#Defining attacker and victim.
 	var attacker : Battler = args[0]
 	var victim : Battler = args[1]
+	var attackersStrength = 5
 	
 	#Defining their BattlerReference.
 	var attackerReference = attacker.battlerReference
@@ -28,6 +29,9 @@ func execute(args := []) -> void:
 	#I am going to use "Animation Player" for this.
 	#Attacker hits the victim.
 	yield(get_tree().create_timer(ATTACK_DURATION), "timeout")
+	
+	#Victim takes some damage.
+	victim.takeDamage(attackersStrength)
 	
 	#Attacker returns to his place after attacking.
 	attackerReference.returnToStart()

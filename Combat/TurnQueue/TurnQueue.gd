@@ -34,8 +34,13 @@ func skipTurn() -> void:
 	var nextIndex = (activeCharacter.get_index() + 1) % get_child_count()
 	activeCharacter = get_child(nextIndex)
 	
+	#If next character is dead, pick next one.
+	if not activeCharacter.isAlive:
+		skipTurn()
+		return
+		
 	#Sets true next active character's indicator.
-	activeCharacter.get_node("Queue").visible = true
+	activeCharacter.get_node("Queue").visible = true		
 	
 	#If next active character is Enemy, will play it automatically.
 	if activeCharacter is Enemy:
