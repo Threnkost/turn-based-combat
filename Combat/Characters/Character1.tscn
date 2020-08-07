@@ -6,7 +6,7 @@
 [ext_resource path="res://Combat/Actions/Attack.gd" type="Script" id=4]
 [ext_resource path="res://Combat/Actions/IAction.gd" type="Script" id=5]
 [ext_resource path="res://Stats/Stat.gd" type="Script" id=6]
-[ext_resource path="res://Assets/progress.png" type="Texture" id=7]
+[ext_resource path="res://Combat/HealthBar/HealthBar.tscn" type="PackedScene" id=7]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -26,30 +26,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 0.305882, 0.301961, 0.301961, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("../HealthBar:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.6 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("../HealthBar:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.6 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -110,19 +86,10 @@ baseAmount = 20
 script = ExtResource( 6 )
 baseAmount = 0
 
-[node name="HealthBar" type="TextureProgress" parent="."]
-margin_left = -32.1376
-margin_top = 37.0
-margin_right = 34.8624
-margin_bottom = 46.0
-value = 50.0
-texture_under = ExtResource( 7 )
-texture_progress = ExtResource( 7 )
-tint_under = Color( 0.517647, 0.164706, 0.372549, 1 )
-tint_progress = Color( 1, 0.00392157, 0.282353, 1 )
-nine_patch_stretch = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="HealthBar" parent="." instance=ExtResource( 7 )]
+margin_left = -31.0
+margin_top = 35.0
+margin_right = 32.0
+margin_bottom = 45.0
 [connection signal="statChanged" from="Stats/MaxHealth" to="." method="_on_MaxHealth_statChanged"]
 [connection signal="statChanged" from="Stats/Health" to="." method="_on_Health_statChanged"]

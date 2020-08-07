@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Combat/Characters/Monster1.gd" type="Script" id=1]
 [ext_resource path="res://Assets/characters.png" type="Texture" id=2]
 [ext_resource path="res://Combat/Battler/BattlerReference/BattlerReference.gd" type="Script" id=3]
 [ext_resource path="res://Combat/Actions/IAction.gd" type="Script" id=4]
 [ext_resource path="res://Combat/Actions/Attack.gd" type="Script" id=5]
+[ext_resource path="res://Combat/HealthBar/HealthBar.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Stats/Stat.gd" type="Script" id=7]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -30,6 +32,15 @@ script = ExtResource( 4 )
 [node name="Attack" type="Node" parent="BattlerReference/Actions"]
 script = ExtResource( 5 )
 
+[node name="Stats" type="Node" parent="."]
+
+[node name="MaxHealth" type="Node" parent="Stats"]
+script = ExtResource( 7 )
+baseAmount = 10
+
+[node name="Health" type="Node" parent="Stats"]
+script = ExtResource( 7 )
+
 [node name="Queue" type="ColorRect" parent="."]
 visible = false
 margin_left = -6.54006
@@ -39,3 +50,11 @@ margin_bottom = 52.9561
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="HealthBar" parent="." instance=ExtResource( 6 )]
+margin_left = -31.0
+margin_top = 35.0
+margin_right = 32.0
+margin_bottom = 45.0
+[connection signal="statChanged" from="Stats/MaxHealth" to="." method="_on_MaxHealth_statChanged"]
+[connection signal="statChanged" from="Stats/Health" to="." method="_on_Health_statChanged"]

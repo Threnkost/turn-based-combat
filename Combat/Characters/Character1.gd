@@ -10,7 +10,7 @@ func _ready():
 #	.playTurn(turnQueue)
 
 func _on_MaxHealth_statChanged(statName, newAmount):
-	$HealthBar.max_value = newAmount
+	$HealthBar.updateMaxValue(newAmount)
 
 func _on_Health_statChanged(statName, newAmount):
-	$HealthBar.value = newAmount
+	$HealthBar.updateCurrentValue(newAmount)

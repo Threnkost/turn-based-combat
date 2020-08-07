@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/progress.png" type="Texture" id=1]
+[ext_resource path="res://Combat/HealthBar/HealthBar.gd" type="Script" id=2]
+
+[node name="HealthBar" type="TextureProgress"]
+margin_left = -32.0
+margin_right = 31.0
+margin_bottom = 10.0
+value = 50.0
+texture_under = ExtResource( 1 )
+texture_progress = ExtResource( 1 )
+tint_under = Color( 0.384314, 0.105882, 0.254902, 1 )
+tint_progress = Color( 0.941176, 0.0666667, 0.203922, 1 )
+nine_patch_stretch = true
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]

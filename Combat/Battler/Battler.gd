@@ -7,6 +7,8 @@ class_name Battler
 #startPosition is battler's starting position. 
 onready var battlerReference #: BattlerReference
 onready var startPosition : Vector2
+
+onready var healthBar = $HealthBar
 onready var stats = $Stats
 
 var isAlive : bool = true
