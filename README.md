@@ -1,2 +1,2 @@
 # turn-based-combat
-The Turn-Based Combat System that made in Godot Engine (Still Developing)
+The Turn-Based Combat System that was made in Godot Engine (Still Developing)
