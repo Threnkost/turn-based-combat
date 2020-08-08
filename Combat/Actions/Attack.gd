@@ -3,8 +3,8 @@ extends IAction
 #This action is to have the battler attack to someone.
 class_name Attack
 
-const TARGET_DISTANCE = 85
-const TWEEN_DURATION = 0.5
+#const TARGET_DISTANCE = 85
+#const TWEEN_DURATION = 0.5
 const ATTACK_DURATION = 0.65
 
 #There are totally 2 parameters.
@@ -26,11 +26,11 @@ func execute(args := []) -> void:
 	attackerReference.goToEntity(victim)
 	yield(attackerReference.tween, "tween_completed")
 	
-	#I am going to use "Animation Player" for this.
-	#Attacker hits the victim.
-	yield(get_tree().create_timer(ATTACK_DURATION), "timeout")
+	#Plays attacker "Attack" animation.
+	attackerReference.animationPlayer.play("Attack")
+	yield(attackerReference.animationPlayer, "animation_finished")
 	
-	#Victim takes some damage.
+	#Victim takes some damage.	
 	victim.takeDamage(attackersStrength)
 	
 	#Attacker returns to his place after attacking.
