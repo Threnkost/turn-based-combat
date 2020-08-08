@@ -22,22 +22,22 @@ __meta__ = {
 script = ExtResource( 2 )
 
 [node name="Character1" parent="TurnQueue" instance=ExtResource( 3 )]
-position = Vector2( 243.09, 85.8549 )
+position = Vector2( 245, 90 )
 
 [node name="Character2" parent="TurnQueue" instance=ExtResource( 3 )]
-position = Vector2( 242.09, 191.855 )
+position = Vector2( 245, 190 )
 
 [node name="Character3" parent="TurnQueue" instance=ExtResource( 3 )]
-position = Vector2( 241.09, 299.855 )
+position = Vector2( 245, 290 )
 
 [node name="Monster1" parent="TurnQueue" instance=ExtResource( 4 )]
-position = Vector2( 746.447, 88.847 )
+position = Vector2( 745, 90 )
 
 [node name="Monster2" parent="TurnQueue" instance=ExtResource( 4 )]
-position = Vector2( 749.447, 196.847 )
+position = Vector2( 745, 190 )
 
 [node name="Monster3" parent="TurnQueue" instance=ExtResource( 4 )]
-position = Vector2( 748.447, 310.847 )
+position = Vector2( 745, 290 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 
