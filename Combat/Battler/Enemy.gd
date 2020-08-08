@@ -16,7 +16,3 @@ func playTurn(turnQueue) -> void:
 	#Executes "Attack" action. [Actions/Attack]
 	var attackAction = battlerReference.getAction("Attack")
 	attackAction.execute([self, AI.getRandomTarget(turnQueue.battleground.allies)])
-	yield(attackAction, "action_completed")
-	
-	#Skips this turn.
-	turnQueue.skipTurn()

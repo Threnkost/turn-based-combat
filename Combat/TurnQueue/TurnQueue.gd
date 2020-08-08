@@ -3,6 +3,8 @@ extends YSort
 #This class is to figure out turns.
 class_name TurnQueue
 
+signal turn_changed(activeBattler)
+
 #The battleground.
 onready var battleground
 onready var label #Not necessary.
@@ -20,6 +22,9 @@ func initialize() -> void:
 	
 	#Not necessary.
 	print("Started with : ", activeCharacter.name)
+
+	playTurn()
+	emit_signal("turn_changed", activeCharacter)
 
 #Plays active character's turn.
 func playTurn() -> void:
@@ -40,11 +45,11 @@ func skipTurn() -> void:
 		return
 		
 	#Sets true next active character's indicator.
-	activeCharacter.get_node("Queue").visible = true		
+	activeCharacter.get_node("Queue").visible = true
+	emit_signal("turn_changed", activeCharacter)	
 	
 	#If next active character is Enemy, will play it automatically.
-	if activeCharacter is Enemy:
-		playTurn()
+	playTurn()
 
 #Ummm, To be honest, I don't know xD
 #I will add user interface later.
@@ -52,5 +57,5 @@ func _process(delta):
 	if activeCharacter is Ally:
 		if Input.is_action_just_pressed("skipTurn"): #Skips current turn.
 			skipTurn()
-		elif Input.is_action_just_pressed("playTurn"): #Plays active character's (Ally) turn.
-			playTurn()
+#		elif Input.is_action_just_pressed("playTurn"): #Plays active character's (Ally) turn.
+#			playTurn()

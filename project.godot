@@ -39,10 +39,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Combat/AI/EnemyAI.gd"
 }, {
+"base": "ISkill",
+"class": "HealSkill",
+"language": "GDScript",
+"path": "res://Combat/Skills/Heal.gd"
+}, {
 "base": "Node",
 "class": "IAction",
 "language": "GDScript",
 "path": "res://Combat/Actions/IAction.gd"
+}, {
+"base": "IAction",
+"class": "ISkill",
+"language": "GDScript",
+"path": "res://Combat/Skills/Skill.gd"
 }, {
 "base": "Node",
 "class": "Stat",
@@ -61,7 +71,9 @@ _global_script_class_icons={
 "BattlerReference": "",
 "Enemy": "",
 "EnemyAI": "",
+"HealSkill": "",
 "IAction": "",
+"ISkill": "",
 "Stat": "",
 "TurnQueue": ""
 }
@@ -75,6 +87,7 @@ config/icon="res://icon.png"
 [display]
 
 window/size/resizable=false
+window/dpi/allow_hidpi=true
 
 [importer_defaults]
 

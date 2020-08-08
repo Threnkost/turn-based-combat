@@ -19,4 +19,4 @@ func getRandomTarget(targets : Array) -> Battler:
 			aliveTargets.append(i)
 	var targetCount = aliveTargets.size()
 	var target : Battler = aliveTargets[rng.randi_range(0, targetCount - 1)]
-	return aliveTargets[0]#target
+	return target

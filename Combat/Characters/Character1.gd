@@ -6,9 +6,6 @@ onready var health : Stat = $Stats/Health
 func _ready():
 	health.addModifier(maxHealth.getTotalAmount())
 
-#func playTurn(turnQueue) -> void:
-#	.playTurn(turnQueue)
-
 func _on_MaxHealth_statChanged(statName, newAmount):
 	$HealthBar.updateMaxValue(newAmount)
 

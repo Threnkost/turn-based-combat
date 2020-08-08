@@ -37,5 +37,4 @@ func execute(args := []) -> void:
 	attackerReference.returnToStart()
 	yield(attackerReference.tween, "tween_completed")
 	
-	#Emits signal, action_completed, to finish the action.
-	emit_signal("action_completed")
+	turnQueue.skipTurn()

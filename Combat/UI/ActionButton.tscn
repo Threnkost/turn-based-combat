@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Combat/UI/ActionButton.gd" type="Script" id=1]
+
+[node name="ActionButton" type="TextureButton"]
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 16 )
+script = ExtResource( 1 )
+[connection signal="pressed" from="." to="." method="_on_ActionButton_pressed"]

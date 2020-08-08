@@ -1,12 +1,14 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Combat/Characters/Character1.gd" type="Script" id=1]
 [ext_resource path="res://Assets/characters.png" type="Texture" id=2]
 [ext_resource path="res://Combat/Battler/BattlerReference/BattlerReference.gd" type="Script" id=3]
-[ext_resource path="res://Combat/Actions/Attack.gd" type="Script" id=4]
-[ext_resource path="res://Combat/Actions/IAction.gd" type="Script" id=5]
-[ext_resource path="res://Stats/Stat.gd" type="Script" id=6]
-[ext_resource path="res://Combat/HealthBar/HealthBar.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Combat/Actions/IAction.gd" type="Script" id=4]
+[ext_resource path="res://Combat/Actions/Attack.gd" type="Script" id=5]
+[ext_resource path="res://Assets/combat_ui_icons.png" type="Texture" id=6]
+[ext_resource path="res://Combat/Skills/Heal.gd" type="Script" id=7]
+[ext_resource path="res://Stats/Stat.gd" type="Script" id=8]
+[ext_resource path="res://Combat/HealthBar/HealthBar.tscn" type="PackedScene" id=9]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -44,6 +46,14 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( -8.2605, 0 ), Vector2( 0, 0 ), Vector2( 7.7395, 0 ), Vector2( 0, 0 ) ]
 }
 
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 6 )
+region = Rect2( 16, 0, 16, 16 )
+
 [node name="Character1" type="Position2D"]
 script = ExtResource( 1 )
 
@@ -60,11 +70,19 @@ anims/TookDamage = SubResource( 3 )
 
 [node name="Actions" type="Node" parent="BattlerReference"]
 
-[node name="Attack" type="Node" parent="BattlerReference/Actions"]
+[node name="IAction" type="Node" parent="BattlerReference/Actions"]
 script = ExtResource( 4 )
 
-[node name="IAction" type="Node" parent="BattlerReference/Actions"]
+[node name="Attack" type="Node" parent="BattlerReference/Actions"]
 script = ExtResource( 5 )
+icon = SubResource( 4 )
+target = 1
+
+[node name="HealSkill" type="Node" parent="BattlerReference/Actions"]
+script = ExtResource( 7 )
+icon = SubResource( 5 )
+target = 3
+skillDescription = "This skills heals its target."
 
 [node name="Queue" type="ColorRect" parent="."]
 visible = false
@@ -76,17 +94,28 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Indicator" type="ColorRect" parent="."]
+visible = false
+margin_left = -7.0
+margin_top = -50.0
+margin_right = 9.0
+margin_bottom = -36.0
+color = Color( 0.356863, 0.439216, 1, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Stats" type="Node" parent="."]
 
 [node name="MaxHealth" type="Node" parent="Stats"]
-script = ExtResource( 6 )
+script = ExtResource( 8 )
 baseAmount = 20
 
 [node name="Health" type="Node" parent="Stats"]
-script = ExtResource( 6 )
+script = ExtResource( 8 )
 baseAmount = 0
 
-[node name="HealthBar" parent="." instance=ExtResource( 7 )]
+[node name="HealthBar" parent="." instance=ExtResource( 9 )]
 margin_left = -31.0
 margin_top = 35.0
 margin_right = 32.0
