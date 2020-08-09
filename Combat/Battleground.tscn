@@ -1,9 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Combat/Battleground.gd" type="Script" id=1]
 [ext_resource path="res://Combat/TurnQueue/TurnQueue.gd" type="Script" id=2]
-[ext_resource path="res://Combat/Characters/Character1.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Combat/Characters/Monster1.tscn" type="PackedScene" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
 
@@ -18,26 +16,38 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="SpawnPoints" type="Node" parent="."]
+
+[node name="PlayerParty" type="Node" parent="SpawnPoints"]
+
+[node name="Member1" type="Position2D" parent="SpawnPoints/PlayerParty"]
+position = Vector2( 200.95, 60 )
+
+[node name="Member2" type="Position2D" parent="SpawnPoints/PlayerParty"]
+position = Vector2( 199.897, 160 )
+
+[node name="Member3" type="Position2D" parent="SpawnPoints/PlayerParty"]
+position = Vector2( 200.95, 260 )
+
+[node name="Member4" type="Position2D" parent="SpawnPoints/PlayerParty"]
+position = Vector2( 200.95, 360 )
+
+[node name="EnemyParty" type="Node" parent="SpawnPoints"]
+
+[node name="Member1" type="Position2D" parent="SpawnPoints/EnemyParty"]
+position = Vector2( 800, 60 )
+
+[node name="Member2" type="Position2D" parent="SpawnPoints/EnemyParty"]
+position = Vector2( 800, 160 )
+
+[node name="Member3" type="Position2D" parent="SpawnPoints/EnemyParty"]
+position = Vector2( 800, 260 )
+
+[node name="Member4" type="Position2D" parent="SpawnPoints/EnemyParty"]
+position = Vector2( 800, 360 )
+
 [node name="TurnQueue" type="YSort" parent="."]
 script = ExtResource( 2 )
-
-[node name="Character1" parent="TurnQueue" instance=ExtResource( 3 )]
-position = Vector2( 245, 90 )
-
-[node name="Character2" parent="TurnQueue" instance=ExtResource( 3 )]
-position = Vector2( 245, 190 )
-
-[node name="Character3" parent="TurnQueue" instance=ExtResource( 3 )]
-position = Vector2( 245, 290 )
-
-[node name="Monster1" parent="TurnQueue" instance=ExtResource( 4 )]
-position = Vector2( 745, 90 )
-
-[node name="Monster2" parent="TurnQueue" instance=ExtResource( 4 )]
-position = Vector2( 745, 190 )
-
-[node name="Monster3" parent="TurnQueue" instance=ExtResource( 4 )]
-position = Vector2( 745, 290 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 
