@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Combat/Characters/Character1.gd" type="Script" id=1]
 [ext_resource path="res://Assets/characters.png" type="Texture" id=2]
@@ -7,15 +7,16 @@
 [ext_resource path="res://Combat/Actions/Attack.gd" type="Script" id=5]
 [ext_resource path="res://Assets/combat_ui_icons.png" type="Texture" id=6]
 [ext_resource path="res://Combat/Skills/Heal.gd" type="Script" id=7]
-[ext_resource path="res://Stats/Stat.gd" type="Script" id=8]
+[ext_resource path="res://Stats/CharacterStats.gd" type="Script" id=8]
 [ext_resource path="res://Combat/HealthBar/HealthBar.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Combat/Skills/Slash.gd" type="Script" id=10]
+[ext_resource path="res://Stats/Stat.gd" type="Script" id=11]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 16, 16 )
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=2]
 resource_name = "Attack"
 length = 0.5
 tracks/0/type = "value"
@@ -31,8 +32,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, -15 ), Vector2( 0, 0 ), Vector2( 0, -15 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "Death"
+[sub_resource type="Animation" id=3]
 length = 0.65
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
@@ -59,8 +59,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "TookDamage"
+[sub_resource type="Animation" id=4]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
@@ -75,15 +74,15 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( -8.2605, 0 ), Vector2( 0, 0 ), Vector2( 7.7395, 0 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 6 )
 region = Rect2( 0, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 6 )
 region = Rect2( 16, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 6 )
 region = Rect2( 32, 0, 16, 16 )
 
@@ -98,9 +97,9 @@ script = ExtResource( 3 )
 [node name="Tween" type="Tween" parent="BattlerReference"]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="BattlerReference"]
-anims/Attack = SubResource( 7 )
-anims/Death = SubResource( 2 )
-anims/TookDamage = SubResource( 3 )
+anims/Attack = SubResource( 2 )
+anims/Death = SubResource( 3 )
+anims/TookDamage = SubResource( 4 )
 
 [node name="Actions" type="Node" parent="BattlerReference"]
 
@@ -109,19 +108,37 @@ script = ExtResource( 4 )
 
 [node name="Attack" type="Node" parent="BattlerReference/Actions"]
 script = ExtResource( 5 )
-icon = SubResource( 4 )
+icon = SubResource( 5 )
 target = 1
 
 [node name="HealSkill" type="Node" parent="BattlerReference/Actions"]
 script = ExtResource( 7 )
-icon = SubResource( 5 )
+icon = SubResource( 6 )
 target = 3
 skillDescription = "This skills heals its target."
 
 [node name="SlashSkill" type="Node" parent="BattlerReference/Actions"]
 script = ExtResource( 10 )
-icon = SubResource( 6 )
+icon = SubResource( 7 )
 target = 1
+
+[node name="CharacterStats" type="Node" parent="."]
+script = ExtResource( 8 )
+
+[node name="Fire" type="Node" parent="CharacterStats"]
+script = ExtResource( 11 )
+
+[node name="Earth" type="Node" parent="CharacterStats"]
+script = ExtResource( 11 )
+
+[node name="Air" type="Node" parent="CharacterStats"]
+script = ExtResource( 11 )
+
+[node name="Thunder" type="Node" parent="CharacterStats"]
+script = ExtResource( 11 )
+
+[node name="Water" type="Node" parent="CharacterStats"]
+script = ExtResource( 11 )
 
 [node name="Queue" type="ColorRect" parent="."]
 visible = false
@@ -144,20 +161,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Stats" type="Node" parent="."]
-
-[node name="MaxHealth" type="Node" parent="Stats"]
-script = ExtResource( 8 )
-baseAmount = 20
-
-[node name="Health" type="Node" parent="Stats"]
-script = ExtResource( 8 )
-baseAmount = 0
-
 [node name="HealthBar" parent="." instance=ExtResource( 9 )]
 margin_left = -31.0
 margin_top = 35.0
 margin_right = 32.0
 margin_bottom = 45.0
-[connection signal="statChanged" from="Stats/MaxHealth" to="." method="_on_MaxHealth_statChanged"]
-[connection signal="statChanged" from="Stats/Health" to="." method="_on_Health_statChanged"]
