@@ -21,10 +21,13 @@ func playTurn(turnQueue) -> void:
 	
 	var selfInstance = PANEL.instance()
 	selfInstance.initialize(turnQueue, self, self)
+	var isThereAction := false
 	for action in actions.get_children():
 		if action.target == action.actionTarget.SELF:
 			selfInstance.addAction(action, [self])
-	node.call_deferred("add_child", selfInstance)
+			isThereAction = true
+	if isThereAction:
+		node.call_deferred("add_child", selfInstance)
 	
 	for ally in aliveAllies:
 		var ableToAdd : bool = false

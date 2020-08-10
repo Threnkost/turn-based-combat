@@ -4,8 +4,8 @@
 
 [resource]
 script = ExtResource( 1 )
-baseMaxHealth = 10
-baseMaxMana = 10
+baseMaxHealth = 20
+baseMaxMana = 20
 baseStats = {
 
 }
