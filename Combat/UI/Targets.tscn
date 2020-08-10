@@ -1,0 +1,85 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Combat/UI/TargetPanel2.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxFlat" id=1]
+
+[node name="TargetPanel" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 0.25
+anchor_bottom = 0.357
+margin_right = 300.0
+margin_bottom = 250.1
+rect_scale = Vector2( 0.5, 0.5 )
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buttons" type="HBoxContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 0.1
+margin_right = -560.0
+margin_bottom = -10.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Allies" type="Button" parent="Panel/Buttons"]
+margin_right = 300.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 300, 50 )
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Allies"
+
+[node name="Enemies" type="Button" parent="Panel/Buttons"]
+margin_left = 300.0
+margin_right = 600.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 300, 50 )
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Enemies"
+
+[node name="TargetEnemy" type="ScrollContainer" parent="Panel"]
+anchor_left = 0.028
+anchor_top = 0.124
+anchor_right = 0.957
+anchor_bottom = 0.946
+margin_left = 0.199999
+margin_top = -3.8147e-06
+margin_right = -0.200012
+margin_bottom = -3.05176e-05
+rect_min_size = Vector2( 10, 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Enemies" type="VBoxContainer" parent="Panel/TargetEnemy"]
+
+[node name="TargetAlly" type="ScrollContainer" parent="Panel"]
+anchor_left = 0.028
+anchor_top = 0.124
+anchor_right = 0.957
+anchor_bottom = 0.946
+margin_left = 0.199999
+margin_top = -3.8147e-06
+margin_right = -0.200012
+margin_bottom = -3.05176e-05
+rect_min_size = Vector2( 10, 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Allies" type="VBoxContainer" parent="Panel/TargetAlly"]
+[connection signal="pressed" from="Panel/Buttons/Allies" to="." method="_on_Allies_pressed"]
+[connection signal="pressed" from="Panel/Buttons/Enemies" to="." method="_on_Enemies_pressed"]

@@ -16,37 +16,23 @@ func playTurn(turnQueue) -> void:
 		if ally.isAlive:
 			aliveAllies.append(ally)
 			
-	var node = turnQueue.battleground.get_node("UI/Panel/Scroll/Targets")
-	var PANEL = load("res://Combat/UI/TargetPanel.tscn")
-	
-	var selfInstance = PANEL.instance()
-	selfInstance.initialize(turnQueue, self, self)
-	var isThereAction := false
-	for action in actions.get_children():
-		if action.target == action.actionTarget.SELF:
-			selfInstance.addAction(action, [self])
-			isThereAction = true
-	if isThereAction:
-		node.call_deferred("add_child", selfInstance)
-	
-	for ally in aliveAllies:
-		var ableToAdd : bool = false
-		var instance = PANEL.instance()
-		instance.initialize(turnQueue, self, ally)
+	var targetPanel = turnQueue.battleground.get_node("UI/TargetPanel")
+	var targetInfo  = load("res://Combat/UI/TargetInfo.tscn")
+	var targetInfoInstance = targetInfo.instance()
+
+#	for ally in aliveAllies:
+#		var parameters = [self, ally]
+#
+#		for action in actions.get_children():
+#			if action.target == action.actionTarget.TEAM:
+#				targetInfoInstance.addAction(action, parameters)
+#				targetPanel.addPanelToAllySide(targetInfoInstance)
+				
+	for enemy in aliveEnemies:
+		var parameters = [self, enemy]
+		
 		for action in actions.get_children():
 			if action.target == action.actionTarget.ALLY:
-				instance.addAction(action, [self, ally])
-				ableToAdd = true
-		if ableToAdd: 
-			node.call_deferred("add_child", instance)
-	
-	for enemy in aliveEnemies:	
-		var ableToAdd : bool = false
-		var instance = PANEL.instance()
-		instance.initialize(turnQueue, self, enemy)
-		for action in actions.get_children():
-			if action.target == action.actionTarget.ENEMY:
-				instance.addAction(action, [self, enemy])
-				ableToAdd = true
-		if ableToAdd:
-			node.call_deferred("add_child", instance)
+				targetInfoInstance = targetInfo.initialize(self, enemy)
+				targetInfoInstance.addAction(action, parameters)
+				targetPanel.addPanelToAllySide(targetInfoInstance)

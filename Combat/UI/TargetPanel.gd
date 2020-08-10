@@ -2,12 +2,12 @@ extends Panel
 
 onready var _battler : Ally
 onready var _targetBattler : Battler
-onready var _turnQueue : TurnQueue
+#onready var _turnQueue : TurnQueue
 
 var _actions : Array = []
 
 func initialize(turnQueue : TurnQueue, newBattler : Ally, targetBattler : Battler) -> void:
-	_turnQueue = turnQueue
+#	_turnQueue = turnQueue
 
 	_battler = newBattler
 	_targetBattler = targetBattler

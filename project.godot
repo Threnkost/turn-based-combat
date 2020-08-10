@@ -89,6 +89,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Stats/Stat.gd"
 }, {
+"base": "Resource",
+"class": "TestResource",
+"language": "GDScript",
+"path": "res://Test/TestResource.gd"
+}, {
 "base": "YSort",
 "class": "TurnQueue",
 "language": "GDScript",
@@ -111,6 +116,7 @@ _global_script_class_icons={
 "RangedAttack": "",
 "SlashSkill": "",
 "Stat": "",
+"TestResource": "",
 "TurnQueue": ""
 }
 
@@ -122,6 +128,8 @@ config/icon="res://icon.png"
 
 [display]
 
+window/size/width=1200
+window/size/height=700
 window/size/resizable=false
 window/dpi/allow_hidpi=true
 
