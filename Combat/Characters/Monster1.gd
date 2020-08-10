@@ -1,13 +1,14 @@
 extends Enemy
 
-#onready var maxHealth : Stat = $Stats/MaxHealth
-#onready var health : Stat = $Stats/Health
+#func playTurn(turnQueue : TurnQueue):
+#	yield(get_tree().create_timer(0.35), "timeout")
 #
-#func _ready():
-#	health.addModifier(maxHealth.getTotalAmount())
+#	var healAction = getAction("HealSkill")
+#	healAction.execute([self, findLowHpTeamMate(turnQueue.battleground.enemies)])
 #
-#func _on_MaxHealth_statChanged(statName, newAmount):
-#	$HealthBar.updateMaxValue(newAmount)
+#func findLowHpTeamMate(teamList := []) -> Enemy:	
+#	teamList.sort_custom(self, "sort")
+#	return teamList[0]
 #
-#func _on_Health_statChanged(statName, newAmount):
-#	$HealthBar.updateCurrentValue(newAmount)
+#func sort(enemyOne : Enemy, enemyTwo : Enemy) -> bool:
+#	return enemyOne.healthPoint < enemyTwo.healthPoint

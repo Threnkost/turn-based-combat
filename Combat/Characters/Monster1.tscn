@@ -54,7 +54,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 0.207843, 0.207843, 0.207843, 1 ) ]
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.564706, 0.564706, 0.564706, 1 ) ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -88,7 +88,6 @@ anims/Death = SubResource( 3 )
 anims/TookDamage = SubResource( 4 )
 
 [node name="CharacterStats" type="Node" parent="."]
-editor/display_folded = true
 script = ExtResource( 5 )
 
 [node name="Fire" type="Node" parent="CharacterStats"]
@@ -107,7 +106,6 @@ script = ExtResource( 6 )
 script = ExtResource( 6 )
 
 [node name="Actions" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="IAction" type="Node" parent="Actions"]
 script = ExtResource( 7 )

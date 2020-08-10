@@ -13,12 +13,18 @@ func _ready():
 	var playerParty = []
 	var enemyParty = []
 	
-	for i in 3:
+	for i in 2:
 		var PLAYER_CHARACTER = load("res://Combat/Characters/Character1.tscn").instance()
 		var ENEMY_CHARACTER = load("res://Combat/Characters/Monster1.tscn").instance()
 		
 		playerParty.append(PLAYER_CHARACTER)
 		enemyParty.append(ENEMY_CHARACTER)
+		
+	var PLAYER_2 = load("res://Combat/Characters/Character2.tscn").instance()
+	var ENEMY_2 = load("res://Combat/Characters/Monster1.tscn").instance()
+	
+	playerParty.append(PLAYER_2)
+	enemyParty.append(ENEMY_2)
 	
 	initializeTeams(playerParty, enemyParty)
 	enterBattle()

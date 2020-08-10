@@ -1,0 +1,188 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://Combat/Battler/Ally.gd" type="Script" id=1]
+[ext_resource path="res://Stats/CharacterStats.gd" type="Script" id=2]
+[ext_resource path="res://Stats/Stat.gd" type="Script" id=3]
+[ext_resource path="res://Combat/Battler/BattlerSprite/BattlerSprite.gd" type="Script" id=4]
+[ext_resource path="res://Assets/characters.png" type="Texture" id=5]
+[ext_resource path="res://Combat/Actions/RangedAttack.gd" type="Script" id=6]
+[ext_resource path="res://Combat/Actions/IAction.gd" type="Script" id=7]
+[ext_resource path="res://Combat/Skills/Heal.gd" type="Script" id=8]
+[ext_resource path="res://Assets/combat_ui_icons.png" type="Texture" id=9]
+[ext_resource path="res://Characters/Character2.tres" type="Resource" id=10]
+[ext_resource path="res://Combat/HealthBar/HealthBar.tscn" type="PackedScene" id=11]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 16, 16, 16 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "Attack"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.25, 0.4, 0.55 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -15 ), Vector2( 0, 0 ), Vector2( 0, -15 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Death"
+tracks/0/type = "value"
+tracks/0/path = NodePath("../HealthBar:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.564706, 0.564706, 0.564706, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Heal"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -15 ), Vector2( 0, 0 ), Vector2( 0, -15 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.564706, 0.564706, 0.564706, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "TookDamage"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -8, 0 ), Vector2( 0, 0 ), Vector2( 8, 0 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 9 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 16, 16, 16 )
+
+[node name="Character2" type="Position2D"]
+script = ExtResource( 1 )
+characterStats = ExtResource( 10 )
+
+[node name="BattlerSprite" type="Sprite" parent="."]
+scale = Vector2( 4, 4 )
+texture = SubResource( 1 )
+script = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BattlerSprite"]
+anims/Attack = SubResource( 2 )
+anims/Death = SubResource( 3 )
+anims/Heal = SubResource( 4 )
+anims/TookDamage = SubResource( 5 )
+
+[node name="Tween" type="Tween" parent="BattlerSprite"]
+
+[node name="CharacterStats" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="Fire" type="Node" parent="CharacterStats"]
+script = ExtResource( 3 )
+
+[node name="Water" type="Node" parent="CharacterStats"]
+script = ExtResource( 3 )
+
+[node name="Thunder" type="Node" parent="CharacterStats"]
+script = ExtResource( 3 )
+
+[node name="Earth" type="Node" parent="CharacterStats"]
+script = ExtResource( 3 )
+
+[node name="Air" type="Node" parent="CharacterStats"]
+script = ExtResource( 3 )
+
+[node name="Actions" type="Node" parent="."]
+
+[node name="IAction" type="Node" parent="Actions"]
+script = ExtResource( 7 )
+
+[node name="HealSkill" type="Node" parent="Actions"]
+script = ExtResource( 8 )
+icon = SubResource( 6 )
+target = 2
+
+[node name="RangedAttack" type="Node" parent="Actions"]
+script = ExtResource( 6 )
+icon = SubResource( 7 )
+target = 1
+
+[node name="HealthBar" parent="." instance=ExtResource( 11 )]
+margin_top = 35.8672
+margin_bottom = 45.8672
+
+[node name="Queue" type="ColorRect" parent="."]
+visible = false
+margin_left = -9.91068
+margin_top = 48.6095
+margin_right = 6.08932
+margin_bottom = 64.6095
+rect_min_size = Vector2( 16, 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Indicator" type="ColorRect" parent="."]
+visible = false
+margin_left = -8.9668
+margin_top = -51.9131
+margin_right = 7.0332
+margin_bottom = -35.9131
+rect_min_size = Vector2( 16, 16 )
+color = Color( 0.631373, 0.156863, 0.823529, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Combat/Characters/Character1.gd" type="Script" id=1]
 [ext_resource path="res://Characters/Character1.tres" type="Resource" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://Combat/Actions/IAction.gd" type="Script" id=7]
 [ext_resource path="res://Combat/Actions/Attack.gd" type="Script" id=8]
 [ext_resource path="res://Assets/combat_ui_icons.png" type="Texture" id=9]
-[ext_resource path="res://Combat/Skills/Heal.gd" type="Script" id=10]
 [ext_resource path="res://Combat/Skills/Slash.gd" type="Script" id=11]
 [ext_resource path="res://Combat/HealthBar/HealthBar.tscn" type="PackedScene" id=12]
 
@@ -43,9 +42,9 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.6 ),
-"transitions": PoolRealArray( 1, 1 ),
+"transitions": PoolRealArray( 1, 1.03526 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 0.207843, 0.207843, 0.207843, 1 ) ]
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.564706, 0.564706, 0.564706, 1 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("../HealthBar:modulate")
@@ -81,10 +80,6 @@ region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 9 )
-region = Rect2( 16, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 9 )
 region = Rect2( 32, 0, 16, 16 )
 
 [node name="Character1" type="Position2D"]
@@ -104,7 +99,6 @@ anims/Death = SubResource( 3 )
 anims/TookDamage = SubResource( 4 )
 
 [node name="CharacterStats" type="Node" parent="."]
-editor/display_folded = true
 script = ExtResource( 5 )
 
 [node name="Fire" type="Node" parent="CharacterStats"]
@@ -123,7 +117,6 @@ script = ExtResource( 6 )
 script = ExtResource( 6 )
 
 [node name="Actions" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="IAction" type="Node" parent="Actions"]
 script = ExtResource( 7 )
@@ -133,15 +126,9 @@ script = ExtResource( 8 )
 icon = SubResource( 5 )
 target = 1
 
-[node name="HealSkill" type="Node" parent="Actions"]
-script = ExtResource( 10 )
-icon = SubResource( 6 )
-target = 3
-skillDescription = "This skills heals its target."
-
 [node name="SlashSkill" type="Node" parent="Actions"]
 script = ExtResource( 11 )
-icon = SubResource( 7 )
+icon = SubResource( 6 )
 target = 1
 
 [node name="Queue" type="ColorRect" parent="."]
