@@ -4,12 +4,12 @@ signal statChanged(statName, newAmount)
 
 class_name Stat
 
-export (int) var baseAmount = 1 setget ,getBaseAmount
+var amount : int = 0
 
 onready var _modifiers : Array = []
 
 func _ready():
-	emit_signal("statChanged", name, baseAmount)
+	emit_signal("statChanged", name, amount)
 
 func addModifier(amount: int) -> void:
 	_modifiers.append(amount)
@@ -21,12 +21,9 @@ func removeModifier(amount: int) -> void:
 	else:
 		_modifiers.append(-amount)
 	emit_signal("statChanged", name, getTotalAmount())
-
-func getBaseAmount() -> float:
-	return baseAmount
 	
 func getTotalAmount() -> float:
-	var totalAmount = baseAmount
+	var totalAmount = amount
 	for i in _modifiers:
 		totalAmount += i
 	return totalAmount

@@ -2,8 +2,11 @@ extends Node
 
 class_name CharacterStats
 
-func initialize() -> void:
-	pass
+func initialize(baseValues : Dictionary = {}) -> void:
+	for i in baseValues:
+		for j in get_children():
+			if i == j.name:
+				j.amount += baseValues[i]
 
 func getAmountOfStat(statName : String) -> int:
 	if has_node(statName):

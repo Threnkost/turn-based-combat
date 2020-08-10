@@ -1,19 +1,20 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Combat/Characters/Character1.gd" type="Script" id=1]
-[ext_resource path="res://Assets/characters.png" type="Texture" id=2]
-[ext_resource path="res://Combat/Battler/BattlerSprite/BattlerReference.gd" type="Script" id=3]
-[ext_resource path="res://Combat/Actions/IAction.gd" type="Script" id=4]
-[ext_resource path="res://Combat/Actions/Attack.gd" type="Script" id=5]
-[ext_resource path="res://Assets/combat_ui_icons.png" type="Texture" id=6]
-[ext_resource path="res://Combat/Skills/Heal.gd" type="Script" id=7]
-[ext_resource path="res://Stats/CharacterStats.gd" type="Script" id=8]
-[ext_resource path="res://Combat/HealthBar/HealthBar.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Combat/Skills/Slash.gd" type="Script" id=10]
-[ext_resource path="res://Stats/Stat.gd" type="Script" id=11]
+[ext_resource path="res://Characters/Character1.tres" type="Resource" id=2]
+[ext_resource path="res://Assets/characters.png" type="Texture" id=3]
+[ext_resource path="res://Combat/Battler/BattlerSprite/BattlerSprite.gd" type="Script" id=4]
+[ext_resource path="res://Stats/CharacterStats.gd" type="Script" id=5]
+[ext_resource path="res://Stats/Stat.gd" type="Script" id=6]
+[ext_resource path="res://Combat/Actions/IAction.gd" type="Script" id=7]
+[ext_resource path="res://Combat/Actions/Attack.gd" type="Script" id=8]
+[ext_resource path="res://Assets/combat_ui_icons.png" type="Texture" id=9]
+[ext_resource path="res://Combat/Skills/Heal.gd" type="Script" id=10]
+[ext_resource path="res://Combat/Skills/Slash.gd" type="Script" id=11]
+[ext_resource path="res://Combat/HealthBar/HealthBar.tscn" type="PackedScene" id=12]
 
 [sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="Animation" id=2]
@@ -75,70 +76,73 @@ tracks/0/keys = {
 }
 
 [sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 6 )
+atlas = ExtResource( 9 )
 region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 6 )
+atlas = ExtResource( 9 )
 region = Rect2( 16, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 6 )
+atlas = ExtResource( 9 )
 region = Rect2( 32, 0, 16, 16 )
 
 [node name="Character1" type="Position2D"]
 script = ExtResource( 1 )
+characterStats = ExtResource( 2 )
 
-[node name="BattlerReference" type="Sprite" parent="."]
+[node name="BattlerSprite" type="Sprite" parent="."]
 scale = Vector2( 4, 3.93072 )
 texture = SubResource( 1 )
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 
-[node name="Tween" type="Tween" parent="BattlerReference"]
+[node name="Tween" type="Tween" parent="BattlerSprite"]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="BattlerReference"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BattlerSprite"]
 anims/Attack = SubResource( 2 )
 anims/Death = SubResource( 3 )
 anims/TookDamage = SubResource( 4 )
 
-[node name="Actions" type="Node" parent="BattlerReference"]
-
-[node name="IAction" type="Node" parent="BattlerReference/Actions"]
-script = ExtResource( 4 )
-
-[node name="Attack" type="Node" parent="BattlerReference/Actions"]
+[node name="CharacterStats" type="Node" parent="."]
+editor/display_folded = true
 script = ExtResource( 5 )
+
+[node name="Fire" type="Node" parent="CharacterStats"]
+script = ExtResource( 6 )
+
+[node name="Earth" type="Node" parent="CharacterStats"]
+script = ExtResource( 6 )
+
+[node name="Air" type="Node" parent="CharacterStats"]
+script = ExtResource( 6 )
+
+[node name="Thunder" type="Node" parent="CharacterStats"]
+script = ExtResource( 6 )
+
+[node name="Water" type="Node" parent="CharacterStats"]
+script = ExtResource( 6 )
+
+[node name="Actions" type="Node" parent="."]
+editor/display_folded = true
+
+[node name="IAction" type="Node" parent="Actions"]
+script = ExtResource( 7 )
+
+[node name="Attack" type="Node" parent="Actions"]
+script = ExtResource( 8 )
 icon = SubResource( 5 )
 target = 1
 
-[node name="HealSkill" type="Node" parent="BattlerReference/Actions"]
-script = ExtResource( 7 )
+[node name="HealSkill" type="Node" parent="Actions"]
+script = ExtResource( 10 )
 icon = SubResource( 6 )
 target = 3
 skillDescription = "This skills heals its target."
 
-[node name="SlashSkill" type="Node" parent="BattlerReference/Actions"]
-script = ExtResource( 10 )
+[node name="SlashSkill" type="Node" parent="Actions"]
+script = ExtResource( 11 )
 icon = SubResource( 7 )
 target = 1
-
-[node name="CharacterStats" type="Node" parent="."]
-script = ExtResource( 8 )
-
-[node name="Fire" type="Node" parent="CharacterStats"]
-script = ExtResource( 11 )
-
-[node name="Earth" type="Node" parent="CharacterStats"]
-script = ExtResource( 11 )
-
-[node name="Air" type="Node" parent="CharacterStats"]
-script = ExtResource( 11 )
-
-[node name="Thunder" type="Node" parent="CharacterStats"]
-script = ExtResource( 11 )
-
-[node name="Water" type="Node" parent="CharacterStats"]
-script = ExtResource( 11 )
 
 [node name="Queue" type="ColorRect" parent="."]
 visible = false
@@ -161,7 +165,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HealthBar" parent="." instance=ExtResource( 9 )]
+[node name="HealthBar" parent="." instance=ExtResource( 12 )]
 margin_left = -31.0
 margin_top = 35.0
 margin_right = 32.0

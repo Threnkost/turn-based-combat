@@ -3,11 +3,6 @@ extends Battler
 #Player's characters.
 class_name Ally
 
-onready var actions
-
-func _ready():
-	actions = battlerReference.get_node("Actions")
-
 func playTurn(turnQueue) -> void:
 #	#Executes "Attack" action.
 	var aliveEnemies := []

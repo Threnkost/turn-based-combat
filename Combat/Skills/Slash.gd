@@ -6,7 +6,7 @@ func execute(args := []):
 	var attacker : Battler = args[0]
 	var victim : Battler = args[1]
 	
-	var attackerReference : BattlerReference = attacker.battlerReference
+	var attackerReference : BattlerSprite = attacker.battlerSprite
 	
 	var attackersStrength = 100
 	

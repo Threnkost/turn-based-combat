@@ -16,25 +16,24 @@ func execute(args := []) -> void:
 	var attackersStrength = 5
 	
 	#Defining their BattlerReference.
-	var attackerReference = attacker.battlerReference
-	var victimReference = victim.battlerReference
+	var attackerSprite = attacker.battlerSprite
 	
 	#For debugging
 	print(attacker.name, " attacked to ", victim.name)
 	
 	#Attacker goes to the victim.
-	attackerReference.goToEntity(victim)
-	yield(attackerReference.tween, "tween_completed")
+	attackerSprite.goToEntity(victim)
+	yield(attackerSprite.tween, "tween_completed")
 	
 	#Plays attacker "Attack" animation.
-	attackerReference.animationPlayer.play("Attack")
-	yield(attackerReference.animationPlayer, "animation_finished")
+	attackerSprite.animationPlayer.play("Attack")
+	yield(attackerSprite.animationPlayer, "animation_finished")
 	
 	#Victim takes some damage.	
 	victim.takeDamage(attackersStrength)
 	
 	#Attacker returns to his place after attacking.
-	attackerReference.returnToStart()
-	yield(attackerReference.tween, "tween_completed")
+	attackerSprite.returnToStart()
+	yield(attackerSprite.tween, "tween_completed")
 	
 	turnQueue.skipTurn()

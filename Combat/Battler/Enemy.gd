@@ -14,5 +14,5 @@ func playTurn(turnQueue) -> void:
 	yield(get_tree().create_timer(0.35), "timeout")
 
 	#Executes "Attack" action. [Actions/Attack]
-	var attackAction = battlerReference.getAction("Attack")
+	var attackAction = getAction("Attack")
 	attackAction.execute([self, AI.getRandomTarget(turnQueue.battleground.allies)])
